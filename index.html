@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AURA ARTS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f2f2; --card:#fff; --text:#111; --muted:#666; --accent:#f7d354; --accent-2:#111;
+}
+body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);transition:0.3s;}
+.dark{--bg:#111;--card:#222;--text:#f2f2f2;--muted:#ccc;--accent:#f7d354;--accent-2:#fff;}
+h1,h2,h3{margin:0;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;}
+section{padding:40px 20px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.grid img{width:100%;border-radius:12px;cursor:pointer;transition:0.3s;}
+.grid img:hover{transform:scale(1.05);}
+.product-card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 4px 18px rgba(0,0,0,0.08);text-align:center;transition:0.3s;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(0,0,0,0.12);}
+.product-card img{width:100%;border-radius:12px;}
+.product-card h3{margin:12px 0 6px;}
+.product-card .price{font-weight:700;color:var(--accent-2);}
+.product-card button{margin-top:8px;padding:8px 12px;border:none;border-radius:8px;background:var(--accent-2);color:white;font-weight:600;cursor:pointer;transition:0.2s;}
+.product-card button:hover{background:var(--accent);}
+form{max-width:600px;margin:0 auto;padding:20px;background:var(--card);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.08);}
+form label{display:block;margin:12px 0 4px;}
+form input,form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-bottom:12px;font-size:15px;}
+form button{padding:10px 14px;border:none;border-radius:8px;background:var(--accent-2);color:white;font-weight:600;cursor:pointer;transition:0.2s;}
+form button:hover{background:var(--accent);}
+#modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:1500;}
+#modal img{max-width:90%;max-height:80%;border-radius:12px;}
+#modal.show{display:flex;}
+.contact-btn{display:inline-block;margin-top:20px;padding:12px 18px;background:var(--accent-2);color:white;border-radius:12px;font-weight:700;transition:0.2s;}
+.contact-btn:hover{background:var(--accent);}
+.hero{text-align:center;padding:60px 20px;background:linear-gradient(135deg,#fff,#fafafa);}
+.hero h1{font-size:48px;}
+.hero p{color:var(--muted);font-size:18px;}
+nav{background:var(--accent-2);padding:12px;text-align:center;}
+nav a{margin:0 12px;color:white;font-weight:600;}
+#preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;z-index:2000;}
+.spinner{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#eee);position:relative;}
+.spinner .dot{width:12px;height:12px;border-radius:50%;background:var(--accent-2);position:absolute;animation:bounce 1s infinite ease-in-out;}
+.spinner .dot:nth-child(1){ left:20%; animation-delay:0s; top:40%; }
+.spinner .dot:nth-child(2){ left:45%; animation-delay:0.15s; top:40%; }
+.spinner .dot:nth-child(3){ left:70%; animation-delay:0.3s; top:40%; }
+@keyframes bounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.dark-btn{position:fixed;top:12px;left:12px;padding:8px 12px;background:var(--accent-2);color:white;border-radius:12px;font-weight:700;z-index:2000;cursor:pointer;}
+.back-btn{position:fixed;top:12px;right:12px;padding:8px 12px;background:var(--accent-2);color:white;border-radius:12px;font-weight:700;z-index:2000;cursor:pointer;}
+.dark-btn:hover,.back-btn:hover{background:var(--accent);}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="spinner">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<button class="dark-btn" onclick="toggleDark()">🌙 Dark</button>
+<button class="back-btn" onclick="history.back()">← Back</button>
+
+<section class="hero">
+  <h1>AURA ARTS</h1>
+  <p>Art inspired by culture</p>
+</section>
+
+<nav>
+  <a href="#gallery">Gallery</a>
+  <a href="#products">Products</a>
+  <a href="#order">Order</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- Gallery -->
+<section id="gallery">
+  <h2>Gallery</h2>
+  <div class="grid">
+    <img src="https://i.ibb.co/1GWgDrTP/image.jpg" alt="Art1" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/Df5px2N5/image.jpg" alt="Art2" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/W4g6KpnL/image.jpg" alt="Art3" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/PyQRw8T/image.jpg" alt="Art4" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/nM68vRmP/image.jpg" alt="Art5" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/GfmSjzwY/image.jpg" alt="Art6" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/KcV03LXP/image.jpg" alt="Art7" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/KpRvLwSK/image.jpg" alt="Art8" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/nsx0w1s7/image.jpg" alt="Art9" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/hx6r70MG/image.jpg" alt="Art10" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/LD4KDHKL/image.jpg" alt="Art11" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/MkJzfWns/image.jpg" alt="Art12" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/prNZQPHb/image.jpg" alt="Art13" onclick="openModal(this.src)">
+    <img src="https://i.ibb.co/fVSsfCx2/image.jpg" alt="Art14" onclick="openModal(this.src)">
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products">
+  <h2>Products</h2>
+  <div class="grid">
+    <div class="product-card">
+      <img src="https://i.ibb.co/1GWgDrTP/image.jpg" alt="Product1">
+      <h3>Mountains Painting</h3>
+      <p class="price">₹399</p>
+      <button onclick="buyProduct('Mountains Painting',399)">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <img src="https://i.ibb.co/Df5px2N5/image.jpg" alt="Product2">
+      <h3>Charcoal Sketch</h3>
+      <p class="price">₹199</p>
+      <button onclick="buyProduct('Charcoal Sketch',199)">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <img src="https://i.ibb.co/W4g6KpnL/image.jpg" alt="Product3">
+      <h3>Hanuman Ji</h3>
+      <p class="price">₹199</p>
+      <button onclick="buyProduct('Hanuman Ji',199)">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <img src="https://i.ibb.co/PyQRw8T/image.jpg" alt="Product4">
+      <h3>Space Painting</h3>
+      <p class="price">₹399</p>
+      <button onclick="buyProduct('Space Painting',399)">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <img src="https://i.ibb.co/nM68vRmP/image.jpg" alt="Product5">
+      <h3>Iron Man</h3>
+      <p class="price">₹299</p>
+      <button onclick="buyProduct('Iron Man',299)">Buy Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- Order Form -->
+<section id="order">
+  <h2>Order Form</h2>
+  <form id="orderForm" onsubmit="submitOrder(event)">
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Your Name" required>
+    
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" placeholder="Your Phone" required>
+    
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Your Email" required>
+    
+    <label for="details">Order Details</label>
+    <textarea id="details" placeholder="Art details / customization"></textarea>
+    
+    <button type="submit">Submit Order</button>
+  </form>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="text-align:center;">
+  <h2>Contact</h2>
+  <a class="contact-btn" href="mailto:pranitchouhan917@gmail.com">Email: pranitchouhan917@gmail.com</a>
+  <br>
+  <a class="contact-btn" href="https://wa.me/919179999498" target="_blank">WhatsApp: +91 9179999498</a>
+</section>
+
+<!-- Modal for Gallery -->
+<div id="modal" onclick="closeModal()">
+  <img id="modalImg" src="" alt="Preview">
+</div>
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').style.display='none', 3000);
+});
+function openModal(src){
+  const modal=document.getElementById('modal');
+  document.getElementById('modalImg').src=src;
+  modal.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  const modal=document.getElementById('modal');
+  modal.classList.remove('show');
+  document.getElementById('modalImg').src='';
+  document.body.style.overflow='';
+}
+function buyProduct(name, price){
+  const msg=encodeURIComponent(`Hello, I want to buy "${name}" priced at ₹${price}.`);
+  window.open('https://wa.me/919179999498?text='+msg,'_blank');
+}
+function submitOrder(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const details=document.getElementById('details').value.trim();
+  if(!name || !phone || !email){ alert('Please fill name, phone, email.'); return;}
+  const msg=encodeURIComponent(`New Order:\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nDetails: ${details}`);
+  window.open('https://wa.me/919179999498?text='+msg,'_blank');
+  alert('Thanks! Redirecting to WhatsApp.');
+  document.getElementById('orderForm').reset();
+}
+function toggleDark(){
+  document.body.classList.toggle('dark');
+}
+</script>
+
+</body>
+</html>
